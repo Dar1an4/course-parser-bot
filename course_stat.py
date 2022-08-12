@@ -13,4 +13,4 @@ def save_course(usd_pars, eur_pars, gbfunt_pars):
     print("Writing complete")
 while True:
     save_course(usd_pars, eur_pars, gbfunt_pars)
-    time.sleep(10)
+    time.sleep(60)
