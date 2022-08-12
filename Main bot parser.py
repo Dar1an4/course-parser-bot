@@ -1,9 +1,10 @@
-from datetime import datetime
 import time
+import datetime
 from threading import Thread
 from course_pars_fun import *
 from aiogram import Bot, Dispatcher, executor, types
 import configparser
+import course_stat
 
 config = configparser.ConfigParser()
 config.read("config.ini")

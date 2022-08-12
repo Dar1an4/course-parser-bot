@@ -1,5 +1,8 @@
+from datetime import datetime
+import time
 import requests
 from bs4 import BeautifulSoup
+import csv
 
 def usd_pars():
     url = 'https://kurs.com.ua/valyuta/usd'
@@ -29,7 +32,7 @@ def usd_pars():
     usd_buy = round((float(usd_course[0][0])), 2)
     usd_sell = round((float(usd_course[1][0])), 2)
     usd_black = round((float(usd_course[2][0])), 2)
-    return f'покупаем: {usd_buy}, продаем: {usd_sell}, чёрный: {usd_black}'
+    return usd_buy, usd_sell, usd_black
 
 def eur_pars():
     url = 'https://kurs.com.ua/valyuta/eur'
@@ -59,7 +62,7 @@ def eur_pars():
     eur_buy = round((float(eur_course[0][0])), 2)
     eur_sell = round((float(eur_course[1][0])), 2)
     eur_black = round((float(eur_course[2][0])), 2)
-    return f'покупаем: {eur_buy}, продаем: {eur_sell}, чёрный: {eur_black}'
+    return eur_buy, eur_sell, eur_black
 
 
 def gbfunt_pars():
@@ -90,4 +93,4 @@ def gbfunt_pars():
     gbfunt_buy = round((float(gbfunt_course[0][0])), 2)
     gbfunt_sell = round((float(gbfunt_course[1][0])), 2)
     gbfunt_black = round((float(gbfunt_course[2][0])), 2)
-    return f'покупаем: {gbfunt_buy}, продаем: {gbfunt_sell}, чёрный: {gbfunt_black}'
+    return gbfunt_buy, gbfunt_sell, gbfunt_black
