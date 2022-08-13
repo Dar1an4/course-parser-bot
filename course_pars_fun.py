@@ -1,8 +1,6 @@
-from datetime import datetime
-import time
 import requests
 from bs4 import BeautifulSoup
-import csv
+
 
 def usd_pars():
     url = 'https://kurs.com.ua/valyuta/usd'
