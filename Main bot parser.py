@@ -20,6 +20,7 @@ async def process_start_command(message: types.Message):
     user_id = message.chat.id
     await message.answer("Привет!\n введите команду /help, что бы ознакомиться со список команд!")
 
+
 @dp.message_handler(commands=['help'])
 async def process_help_command(message: types.Message):
     global user_id
@@ -50,12 +51,14 @@ async def process_notif_course(message: types.Message):
     while counter_day_notif == 0:
         timenow = datetime.datetime.today().strftime("%H:%M")
         if timenow == '20:00' or timenow == '09:00':
+            save_course(usd_pars, eur_pars)
             await message.answer(
                 f"🇺🇸 Доллар:\nпокупка: {usd_pars_list[0]}, продажа: {usd_pars_list[1]}, чёрный: {usd_pars_list[2]}"
                 f" \n🇪🇺 Евро:\nпокупка: {eur_pars_list[0]}, продажа: {eur_pars_list[1]}, чёрный: {eur_pars_list[2]}")
             await asyncio.sleep(45)
         else:
             await asyncio.sleep(45)
+
 
 @dp.message_handler(commands=['stop_notif'])
 async def process_notif_course(message: types.Message):

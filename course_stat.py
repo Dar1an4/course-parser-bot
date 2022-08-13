@@ -4,7 +4,9 @@ import time
 import csv
 
 def save_course(usd_pars, eur_pars):
-    myData = [[datetime.datetime.today().strftime("%d.%m %H:%M"), usd_pars()[0], usd_pars()[1], usd_pars()[2], eur_pars()[0], eur_pars()[1], eur_pars()[2] ]]
+    usd_pars_list = usd_pars()
+    eur_pars_list = eur_pars()
+    myData = [[datetime.datetime.today().strftime("%d.%m %H:%M"), usd_pars_list[0], usd_pars_list[1], usd_pars_list[2], eur_pars_list[0], eur_pars_list[1], eur_pars_list[2] ]]
     myFile = open('sheet_course.csv', 'a')
     with myFile:
         writer = csv.writer(myFile, lineterminator='\n')
