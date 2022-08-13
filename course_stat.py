@@ -3,14 +3,44 @@ import datetime
 import time
 import csv
 
-def save_course(usd_pars, eur_pars, gbfunt_pars):
-    myData = [[datetime.datetime.today().strftime("%d.%m %H:%M"), f'{usd_pars()}', f'{eur_pars()}', f'{gbfunt_pars()}']]
-
-    myFile = open('example2.csv', 'a')
+def save_course(usd_pars, eur_pars):
+    myData = [[datetime.datetime.today().strftime("%d.%m %H:%M"), usd_pars()[0], usd_pars()[1], usd_pars()[2], eur_pars()[0], eur_pars()[1], eur_pars()[2] ]]
+    myFile = open('sheet_course.csv', 'a')
     with myFile:
         writer = csv.writer(myFile, lineterminator='\n')
         writer.writerows(myData)
     print("Writing complete")
-while True:
-    save_course(usd_pars, eur_pars, gbfunt_pars)
-    time.sleep(60)
+
+
+def forward_stats(usd_pars, eur_pars):
+    with open('sheet_course.csv') as f:
+        reader = csv.reader(f)
+        stat_list_str = []
+        for row in reader:
+            stat_list_str.append(row)
+        stat_list_str = stat_list_str[-1]
+        stat_list_str = stat_list_str[1:]
+        stat_list_float = []
+        now_course_list_noround = []
+        now_course_list_round = []
+        usd_pars_list = usd_pars()
+        eur_pars_list = eur_pars()
+        now_course_list_noround.extend(usd_pars_list)
+        now_course_list_noround.extend(eur_pars_list)
+
+    for i in stat_list_str:
+        stat_list_float.append(round(float(i), 1))
+    for i in now_course_list_noround:
+        now_course_list_round.append(round(float(i), 1))
+
+    print(stat_list_float)
+    print(now_course_list_round)
+    print(usd_pars_list, eur_pars_list)
+
+    if stat_list_float != now_course_list_round:
+        save_course(usd_pars, eur_pars)
+        print('The course was changed. BD was refreshed')
+        return False
+    else:
+        print('The course did not changed, allright')
+        return True
