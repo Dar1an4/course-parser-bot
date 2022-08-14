@@ -23,7 +23,7 @@ async def process_help_command(message: types.Message):
     user_id = message.chat.id
     await message.answer(
         "Доступны следующие функции:\n - /courses - показать актуальные курсы валют \n - /notif_course - "
-        "Присылать актуальный курс каждое утро и вечер (08:00 и 21:00) \n - /stop_notif - отключить рассылку "
+        "Присылать актуальный курс каждое утро и вечер (09:00 и 21:00) \n - /stop_notif - отключить рассылку "
         "\n - /notif_change_course - включить оповещение при смене курса \n"
         " - /stop_forward_course - отключить оповещение при смене курса \n - /send_course_sheet - отправка файла БД")
 
@@ -43,10 +43,10 @@ async def process_notif_course(message: types.Message):
     usd_pars_list = usd_pars()
     eur_pars_list = eur_pars()
     counter_day_notif = 0
-    await message.answer(f"Ежедневное оповещение курса (в 08:00 и в 20:00) включено!")
+    await message.answer(f"Ежедневное оповещение курса (в 09:00 и в 21:00) включено!")
     while counter_day_notif == 0:
         timenow = datetime.datetime.today().strftime("%H:%M")
-        if timenow == '20:00' or timenow == '09:00':
+        if timenow == '21:00' or timenow == '09:00':
             save_course(usd_pars, eur_pars)
             await message.answer(
                 f"🇺🇸 Доллар:\nпокупка: {usd_pars_list[0]}, продажа: {usd_pars_list[1]}, чёрный: {usd_pars_list[2]}"

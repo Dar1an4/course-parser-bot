@@ -31,9 +31,9 @@ def forward_stats(usd_pars, eur_pars):
         now_course_list_noround.extend(eur_pars_list)
 
     for i in stat_list_str:
-        stat_list_float.append(round(float(i), 1))
+        stat_list_float.append(round(float(i), 2))
     for i in now_course_list_noround:
-        now_course_list_round.append(round(float(i), 1))
+        now_course_list_round.append(round(float(i), 2))
 
     print(stat_list_float)
     print(now_course_list_round)
@@ -46,3 +46,4 @@ def forward_stats(usd_pars, eur_pars):
     else:
         print('The course did not changed, allright')
         return True
+
