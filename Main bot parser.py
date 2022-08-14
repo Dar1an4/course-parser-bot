@@ -31,6 +31,7 @@ async def process_help_command(message: types.Message):
 @dp.message_handler(commands=['courses'])
 async def process_courses_command(message: types.Message):
     global usd_pars_list, eur_pars_list
+    save_course(usd_pars, eur_pars)
     usd_pars_list = usd_pars()
     eur_pars_list =eur_pars()
     await message.answer(f"🇺🇸 Доллар:\nпокупка: {usd_pars_list[0]}, продажа: {usd_pars_list[1]}, чёрный: {usd_pars_list[2]}"
@@ -46,7 +47,7 @@ async def process_notif_course(message: types.Message):
     await message.answer(f"Ежедневное оповещение курса (в 09:00 и в 21:00) включено!")
     while counter_day_notif == 0:
         timenow = datetime.datetime.today().strftime("%H:%M")
-        if timenow == '21:00' or timenow == '09:00':
+        if timenow == '21:00' or timenow == '13:50':
             save_course(usd_pars, eur_pars)
             await message.answer(
                 f"🇺🇸 Доллар:\nпокупка: {usd_pars_list[0]}, продажа: {usd_pars_list[1]}, чёрный: {usd_pars_list[2]}"
